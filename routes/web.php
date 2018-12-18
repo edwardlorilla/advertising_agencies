@@ -11,6 +11,10 @@
 |
 */
 
-Route::get('/{vue_capture?}', function () {
+Route::get('{vue_capture}', function () {
     return view('welcome');
-})->where('vue_capture', '^(?!storage).*$');
+})->where('vue_capture', '^(?!storage|login|register|home).*$'); //exclude from web route
+
+Auth::routes();
+
+Route::get('/home/{vue_capture?}', 'HomeController@index')->where('vue_capture', '^(?!storage).*$')->name('home');
